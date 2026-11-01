@@ -8,6 +8,14 @@ a pantalla completa en menos de un segundo. Solo se ve la carta.
 - **Estado:** Upstash Redis vía REST (las funciones de Vercel no comparten memoria). Sin configurar,
   cae a memoria del proceso: perfecto para desarrollo, **no** para producción.
 
+## En producción
+
+- **Web:** <https://fiixrt-magia.vercel.app> — desplegada desde `main` de
+  <https://github.com/fiixrt/fiixrt-magia>.
+- **Estado:** Upstash Redis conectado (`KV_REST_API_URL` + `KV_REST_API_TOKEN`), `MAGIA_KEY` activa.
+- **Atajo:** `https://fiixrt-magia.vercel.app/api/set?c=Q-2&k=CLAVE` → [ATAJOS.md](ATAJOS.md).
+- **Dashboard:** tarjeta **Truco de Magia** en `http://192.168.1.45:7778` con el botón *Ver carta actual*.
+
 ```
 api/set.js       GET/POST ?c=Q-2&k=CLAVE  → fija la carta
 api/now.js       GET                      → carta actual en JSON
@@ -36,9 +44,11 @@ npm run preview  # sirve dist/
 npm run cards    # regenera public/cards desde public/poker-v2.png (necesita Pillow)
 ```
 
-## Desplegar
+## Montarlo desde cero
 
-1. **GitHub** — sube este repo a `https://github.com/fiixrt/fiixrt-magia`.
+Ya está desplegado; esto es por si hay que rehacerlo en otra cuenta.
+
+1. **GitHub** — importa el repo en `https://github.com/fiixrt/fiixrt-magia` y trabaja en `main`.
 2. **Vercel** — *Add New → Project → Import Git Repository* y elige el repo. Detecta Vite solo
    (`npm run build` → `dist`). No hace falta tocar nada más.
 3. **Upstash (imprescindible para que sea fiable en Vercel)**
@@ -52,8 +62,8 @@ npm run cards    # regenera public/cards desde public/poker-v2.png (necesita Pil
 5. **Redeploy** y comprueba:
 
 ```bash
-curl "https://TU-APP.vercel.app/api/set?c=Q-2&k=CLAVE"
-curl "https://TU-APP.vercel.app/api/now"
+curl "https://fiixrt-magia.vercel.app/api/set?c=Q-2&k=CLAVE"
+curl "https://fiixrt-magia.vercel.app/api/now"
 ```
 
 Después, monta el atajo siguiendo [ATAJOS.md](ATAJOS.md).
@@ -73,7 +83,7 @@ El dashboard (`http://192.168.1.45:7778`, contenedor `pc-power-controller`) tien
 deployments del repo; si no, se puede fijar:
 
 ```bash
-docker exec pc-power-controller sh -c 'echo "{\"url\":\"https://TU-APP.vercel.app\"}" > /app/magia_config.json'
+docker exec pc-power-controller sh -c 'echo "{\"url\":\"https://fiixrt-magia.vercel.app\"}" > /app/magia_config.json'
 ```
 
 o con la variable de entorno `MAGIA_VERCEL_URL` en el `docker-compose.yml`.

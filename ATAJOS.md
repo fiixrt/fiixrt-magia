@@ -2,12 +2,14 @@
 
 Todo lo necesario para que cualquier atajo mande una carta a la web y esta cambie al instante.
 
+Web en producción: **https://fiixrt-magia.vercel.app** · estado en el dashboard: `http://192.168.1.45:7778`
+
 ```
-https://TU-APP.vercel.app/api/set?c=CARTA&k=CLAVE
+https://fiixrt-magia.vercel.app/api/set?c=CARTA&k=CLAVE
 ```
 
 - `CARTA` → la carta en cualquiera de los formatos aceptados (abajo).
-- `k` → la clave secreta **solo si** has definido `MAGIA_KEY` en Vercel. Si no la defines, se puede omitir (en pruebas).
+- `k` → la clave de `MAGIA_KEY`. Ahora mismo está activa, así que **sin ella el atajo recibe 401**.
 
 ---
 
@@ -16,7 +18,7 @@ https://TU-APP.vercel.app/api/set?c=CARTA&k=CLAVE
 En **Atajos → +** (nuevo atajo):
 
 1. Añade la acción **Obtener contenido de URL**.
-2. **URL:** `https://TU-APP.vercel.app/api/set?c=Q-2`
+2. **URL:** `https://fiixrt-magia.vercel.app/api/set?c=Q-2&k=CLAVE`
 3. Pulsa el desplegable «Mostrar más»:
    - **Método:** `GET`
    - **Solicitar encabezados:** sin tocar nada
@@ -49,7 +51,7 @@ Códigos del truco:
 
 Ejemplos: As de Picas → `A-1` · 10 de Corazones → `10-2` · Jota de Diamantes → `J-3` · Reina de Tréboles → `Q-4` · Rey de Picas → `K-1`.
 
-**Vaciar la pantalla:** `?c=reset` (la web vuelve a «Esperando carta»).
+**Vaciar la pantalla:** `?c=reset&k=CLAVE` (la web vuelve a «Esperando carta»).
 
 ---
 
@@ -91,7 +93,7 @@ Ejemplos:
 La respuesta (`Q-2`, `10-3`, `1-1`…) se guarda en la variable **Carta** y se usa así:
 
 1. **Obtener contenido de URL**
-   - URL: `https://TU-APP.vercel.app/api/set?c=` + variable **Carta**
+   - URL: `https://fiixrt-magia.vercel.app/api/set?c=` + variable **Carta** + `&k=CLAVE`
    - Método: `GET`
 2. Fin.
 
@@ -120,7 +122,7 @@ La respuesta (`Q-2`, `10-3`, `1-1`…) se guarda en la variable **Carta** y se u
 Cualquier móvil puede consultar el estado sin abrir la web:
 
 ```
-https://TU-APP.vercel.app/api/now
+https://fiixrt-magia.vercel.app/api/now
 ```
 
 Devuelve `{"ok":true,"card":{"code":"Q-2","label":"Reina de Corazones",...}}` o `card: null` si está vacía.
