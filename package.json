@@ -1,0 +1,21 @@
+{
+  "name": "fiixrt-magia",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Truco de magia: la carta que llega desde un atajo de iOS se muestra a pantalla completa",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "cards": "python3 scripts/slice-cards.py"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "vite": "^8.3.5"
+  }
+}
