@@ -29,6 +29,12 @@ En **Atajos → +** (nuevo atajo):
 
 > Con eso, al ejecutarlo la web que esté abierta en cualquier móvil cambia a esa carta en menos de 1 segundo.
 
+### Atajos ya generados
+
+En [`shortcuts/`](shortcuts/) hay dos atajos completos en XML, validados con el validador de
+Shortcuts Playground: uno de carta fija y otro que toma la carta como texto de entrada. Se pueden
+firmar en un Mac (`shortcuts sign`) e importar directamente. Detalles en [shortcuts/README.md](shortcuts/README.md).
+
 ---
 
 ## 2. Formatos aceptados para `c`
