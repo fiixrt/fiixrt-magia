@@ -59,6 +59,8 @@ Ejemplos: As de Picas → `A-1` · 10 de Corazones → `10-2` · Jota de Diamant
 
 **Vaciar la pantalla:** `?c=reset&k=CLAVE` (la web vuelve a «Esperando carta»).
 
+**No había carta:** si el modelo responde `Ninguna` (o `Sin carta`), el servidor devuelve `ok` pero **no toca la carta actual**: la web se queda como estaba. Así el atajo puede enviar siempre la respuesta del modelo sin condición previa.
+
 ---
 
 ## 3. En los demás atajos: de la transcripción a la URL

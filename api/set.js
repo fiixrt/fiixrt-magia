@@ -3,7 +3,7 @@
 //
 // Formatos aceptados para "c":  Q-2 · A♠ · 10H · as de picas · 1-1 · reset
 
-import { CLEAR_WORDS, parseCard } from "../lib/cards.js";
+import { CLEAR_WORDS, isNoCard, parseCard } from "../lib/cards.js";
 import { clearState, storeName, writeState } from "../lib/store.js";
 
 function noCache(res) {
@@ -53,6 +53,12 @@ export default async function handler(req, res) {
   const rawCard = body.c ?? body.carta ?? body.card ?? query.c ?? query.carta ?? query.card ?? "";
   const rawValue = body.valor ?? body.value ?? query.v ?? query.valor ?? query.value;
   const rawSuit = body.palo ?? body.suit ?? query.p ?? query.palo ?? query.suit;
+
+  // «Ninguna» = el audio no mencionaba ninguna carta: no se toca lo que ya hay.
+  if (isNoCard(rawCard)) {
+    json(res, 200, { ok: true, card: null, skipped: "ninguna", store: storeName() });
+    return;
+  }
 
   const isEmpty = String(rawCard).trim() === "" && rawValue === undefined;
   const wantsClear = CLEAR_WORDS.includes(String(rawCard).trim().toLowerCase());
