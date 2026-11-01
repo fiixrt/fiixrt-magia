@@ -10,6 +10,8 @@ validador (Crazy/Craig Loop). Son la versión «hecha» de lo que explica [../AT
 | `magia-enviar-carta-entrada.xml` | 6 | Toma el **texto de entrada** (`Q-2`, `Reina de Corazones`, `A♠`…), lo codifica y lo envía. Es el que usan tus otros atajos con «Ejecutar atajo». |
 | `copiar-al-pc-y-magia.xml` | 8 | Reconstrucción de tu atajo **Copiar al pc** con la magia añadida: manda el portapapeles a la web del truco y después al PC (`POST http://192.168.1.45:7777/clipboard` con cuerpo JSON `{"text": …}`). |
 
+| `identificar-carta-y-magia.xml` | 13 | Reproduce tu atajo **Identificar Carta de Póker** (grabar → transcribir → modelo) y le añade el envío: si el modelo no responde «Ninguna», codifica la carta y la manda a la web. |
+
 > El `.shortcut` original de `iCloud/Shortcuts/Copiar al pc.shortcut` está firmado por Apple (AEA1) y su
 > contenido va cifrado, así que se ha reconstruido a partir del contrato de la API del dashboard
 > (`/clipboard` espera JSON con la clave `text`). Si tu atajo hacía otra cosa, dilo y se ajusta.
